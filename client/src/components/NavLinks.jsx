@@ -15,8 +15,7 @@ const NavLinks = ({ isBigSidebar }) => {
             to={path}
             onClick={isBigSidebar ? null : toggleSidebar}
           >
-            <span>{icon}</span>
-            {text}
+            <span>{icon}</span> {text}
           </NavLink>
         );
       })}
