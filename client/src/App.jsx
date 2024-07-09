@@ -7,6 +7,11 @@ import {
   Login,
   DashboardLayout,
   Error,
+  Admin,
+  AddJob,
+  Stats,
+  AllJobs,
+  Profile,
 } from "./pages";
 const router = createBrowserRouter([
   {
@@ -29,6 +34,26 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <DashboardLayout />,
+        children: [
+          {
+            index: true,
+            element: <AddJob />,
+          },
+          { path: "stats", element: <Stats /> },
+          {
+            path: "all-jobs",
+            element: <AllJobs />,
+          },
+
+          {
+            path: "profile",
+            element: <Profile />,
+          },
+          {
+            path: "admin",
+            element: <Admin />,
+          },
+        ],
       },
     ],
   },
