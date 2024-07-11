@@ -12,17 +12,20 @@ import authRouter from "./routes/authRouter.js";
 import errorHandlerMiddleware from "./middleware/errorhandlerMiddleware.js";
 
 import mongoose from "mongoose";
+import { authenticateUser } from "./middleware/authMiddelware.js";
+import cookieParser from "cookie-parser";
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
+app.use(cookieParser());
 app.use(express.json());
 app.get("/", (req, res) => {
   res.send("hello world");
 });
 
-app.use("/api/v1/jobs", jobRouter);
+app.use("/api/v1/jobs", authenticateUser, jobRouter);
 app.use("/api/v1/auth", authRouter);
 
 // // Get All jobs

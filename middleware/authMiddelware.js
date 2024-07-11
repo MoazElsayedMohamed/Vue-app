@@ -1,5 +1,5 @@
-import { UnauthenticatedError } from "../errors/CustomErrors";
-import { VerifyJWT } from "../utils/tokenUtils";
+import { UnauthenticatedError } from "../errors/CustomErrors.js";
+import { VerifyJWT } from "../utils/tokenUtils.js";
 
 export const authenticateUser = (req, res, next) => {
   const { token } = req.cookies;
@@ -9,5 +9,7 @@ export const authenticateUser = (req, res, next) => {
     const { userId, role } = VerifyJWT(token);
     req.user = { userId, role };
     next();
-  } catch (error) {}
+  } catch (error) {
+    throw new UnauthenticatedError("authentication invalid");
+  }
 };
