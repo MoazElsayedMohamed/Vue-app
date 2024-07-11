@@ -6,6 +6,7 @@ import morgan from "morgan";
 const app = express();
 //routes
 import jobRouter from "./routes/jobRouter.js";
+import authRouter from "./routes/authRouter.js";
 
 //middleware
 import errorHandlerMiddleware from "./middleware/errorhandlerMiddleware.js";
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/jobs", jobRouter);
+app.use("/api/v1/auth", authRouter);
 
 // // Get All jobs
 // app.get("/api/v1/jobs");
