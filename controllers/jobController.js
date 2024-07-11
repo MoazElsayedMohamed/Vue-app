@@ -1,13 +1,6 @@
 import Job from "../models/JobModel.js";
 import "http-status-codes";
 import { StatusCodes } from "http-status-codes";
-import { nanoid } from "nanoid";
-import { NotFoundError } from "../errors/CustomErrors.js";
-
-let jobs = [
-  { id: nanoid(), company: "apple", position: "front-end" },
-  { id: nanoid(), company: "google", position: "back-end" },
-];
 
 export const getAllJobs = async (req, res) => {
   const jobs = await Job.find({});
