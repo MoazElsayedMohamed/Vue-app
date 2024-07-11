@@ -1,4 +1,7 @@
-import { UnauthenticatedError } from "../errors/CustomErrors.js";
+import {
+  UnauthenticatedError,
+  UnauthorizedError,
+} from "../errors/CustomErrors.js";
 import { VerifyJWT } from "../utils/tokenUtils.js";
 
 export const authenticateUser = (req, res, next) => {
@@ -12,4 +15,13 @@ export const authenticateUser = (req, res, next) => {
   } catch (error) {
     throw new UnauthenticatedError("authentication invalid");
   }
+};
+
+export const authorizedPermissions = (...roles) => {
+  return (req, res, next) => {
+    if (!req.body.role) {
+      throw new UnauthorizedError("Unauthorized to access this route");
+    }
+    next();
+  };
 };
