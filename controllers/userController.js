@@ -4,8 +4,8 @@ import User from "../models/UserModel.js";
 
 export const getCurrentUser = async (req, res) => {
   const user = await User.findOne({ _id: req.user.userId });
-  const userWithourPassword = user.toJSON();
-  res.status(StatusCodes.OK).json({ user: userWithourPassword });
+  const userWithoutPassword = user.toJSON();
+  res.status(StatusCodes.OK).json({ user: userWithoutPassword });
 };
 export const getApplicationStats = async (req, res) => {
   const users = await User.countDocuments();
@@ -13,8 +13,6 @@ export const getApplicationStats = async (req, res) => {
   return res.status(StatusCodes.OK).json({ users, jobs });
 };
 export const updateUser = async (req, res) => {
-  const obj = { ...req.body };
-  delete obj.password;
-  const updateUser = await User.findByIdAndDelete(req.user.userId, obj);
-  res.status(StatusCodes.OK).json({ updateUser });
+  const updatedUser = await User.findByIdAndUpdate(req.user.userId, req.body);
+  res.status(StatusCodes.OK).json({ updatedUser });
 };

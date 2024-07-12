@@ -8,6 +8,10 @@ const app = express();
 import jobRouter from "./routes/jobRouter.js";
 import authRouter from "./routes/authRouter.js";
 import userRouter from "./routes/userRouter.js";
+// public folder
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import path from "path";
 
 //middleware
 import errorHandlerMiddleware from "./middleware/errorhandlerMiddleware.js";
@@ -16,12 +20,20 @@ import mongoose from "mongoose";
 import { authenticateUser } from "./middleware/authMiddelware.js";
 import cookieParser from "cookie-parser";
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
+app.use(express.static(path.resolve(__dirname, "./public")));
 app.use(cookieParser());
 app.use(express.json());
+
+app.get("/api/v1/test", (req, res) => {
+  res.json({ msg: "test route" });
+});
+
 app.get("/", (req, res) => {
   res.send("hello world");
 });
