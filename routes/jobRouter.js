@@ -17,7 +17,7 @@ router.route("/").get(getAllJobs).post(validateJobInput, createJob);
 router
   .route("/:id")
   .get(validateIdParams, getJob)
-  .patch(validateJobInput, validateIdParams, updateJob)
+  .patch(validateIdParams, updateJob)
   .delete(validateIdParams, deleteJob);
 
 export default router;
