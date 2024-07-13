@@ -39,7 +39,7 @@ const isDarkThemeEnabled = checkDefaultTheme();
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 5,
+      staleTime: 1000 * 10,
     },
   },
 });
@@ -74,7 +74,11 @@ const router = createBrowserRouter([
             element: <AddJob />,
             action: addJobAction,
           },
-          { path: "stats", element: <Stats />, loader: statsLoader },
+          {
+            path: "stats",
+            element: <Stats />,
+            loader: statsLoader(queryClient),
+          },
           {
             path: "all-jobs",
             element: <AllJobs />,
