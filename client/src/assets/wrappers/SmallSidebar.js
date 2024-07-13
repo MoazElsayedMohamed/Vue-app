@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.aside`
   @media (min-width: 992px) {
@@ -60,7 +60,7 @@ const Wrapper = styled.aside`
   }
   .icon {
     font-size: 1.5rem;
-    margin-right: 1rem;
+    margin-right: 2rem;
     display: grid;
     place-items: center;
   }
